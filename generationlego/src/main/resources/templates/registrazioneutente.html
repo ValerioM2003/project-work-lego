@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="it"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Il Mio E-Commerce</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuNavbar" aria-controls="menuNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menuNavbar">
+        <img src="image/minilogo.png" alt="Logo" class="img-fluid imgzi" onclick="goToHomePage()" style="cursor: pointer;"/>
+        <ul class="navbar-nav ml-auto bottom">
+            <li class="nav-item attivo">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/registrazioneutente}">registrati</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<!-- Sezione di Registrazione -->
+<section class="container-fluid home-section">
+    <section class="container mt-4">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Registrazione</h2>
+
+                    <!-- Form di Registrazione -->
+                    <form th:object="${utente}" method="post">
+                        <div class="card-text">
+                            <label for="nome">Nome:</label>
+                            <input type="text" th:field="*{nome}" class="form-control" id="nome" placeholder="Inserisci il nome" required>
+                            <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></p>
+                        </div>
+                        <div class="card-text">
+                            <label for="cognome">Cognome:</label>
+                            <input type="text" th:field="*{cognome}" class="form-control" id="cognome" placeholder="Inserisci il cognome" required>
+                            <p th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" class="text-danger"></p>
+                        </div>
+                        <div class="card-text">
+                            <label for="username">Username:</label>
+                            <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Scegli lo username" required>
+                            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></p>
+                            <p th:if="${duplicato}" th:text="${duplicato}" class="text-danger"></p>
+                        </div>
+                        <div class="card-text">
+                            <label for="password">Password:</label>
+                            <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Scegli la password" required>
+                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></p>
+                        </div>
+                        <div class="card-text">
+                            <label for="address">Via:</label>
+                            <input type="text" class="form-control" id="address" placeholder="Inserisci l'indirizzo" required>
+                        </div>
+                        <div class="card-text">
+                            <label for="city">Città:</label>
+                            <input type="text" class="form-control" id="city" placeholder="Inserisci la città" required>
+                        </div>
+                        <div class="card-text">
+                            <label for="province">CAP:</label>
+                            <input type="text" class="form-control" id="cap" placeholder="Inserisci il CAP" required>
+                        </div>
+                        <div class="card-text">
+                            <label for="province">Provincia:</label>
+                            <input type="text" class="form-control" id="province" placeholder="Inserisci la provincia" required>
+                        </div>
+                        <div class="card-text">
+                            <label for="email">Email:</label>
+                            <input type="email" th:field="*{mail}" class="form-control" id="email" placeholder="Inserisci l'email" required>
+                            <p th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}" class="text-danger"></p>
+                        </div>
+                        <div class="card-text">
+                            <label for="phone">Numero di Telefono:</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Inserisci il numero di telefono" required>
+                        </div>
+                        <div class="card-text">
+                            <label for="birthdate">Data di Nascita:</label>
+                            <input type="date" th:field="*{data}" class="form-control" id="birthdate" placeholder="Scegli la data di nascita" required>
+                            <p th:if="${#fields.hasErrors('data')}" th:errors="*{data}" class="text-danger"></p>
+                            <p th:if="${dataError}" th:text="${dataError}" class="text-danger"></p>
+                        </div>
+                        <!-- Aggiungi altri campi secondo necessità -->
+                        <button type="submit" class="btn btn-primary btn-block">Registrati</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!-- Sezione Chi Siamo -->
+<br>
+<div class="col-md-12">
+
+    <h2 class="text-center margine-bottom-4"  >
+        <a th:href="@{/chisiamo}">Chi Siamo</a>
+    </h2>
+
+    <p>
+        Benvenuti nel nostro negozio online! Siamo appassionati nel fornire prodotti di alta qualità e un'esperienza di shopping eccezionale ai nostri clienti. Esplora la nostra vasta selezione di prodotti e trova esattamente quello che stai cercando.
+    </p>
+</div>
+</section>
+<!-- Footer -->
+<footer class="sfondo-chiaro text-center py-3">
+    <p>&copy; 2024 Il Mio Negozio E-Commerce</p>
+</footer>
+
+<!-- Dipendenze JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{js/script.js}"></script>
+</body>
+</html>

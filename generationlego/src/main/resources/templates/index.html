@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Generation Lego</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+<!-- Sezione Logo -->
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <!-- Pulsante Catalogo -->
+
+        <a th:href="@{catalogo}" class="openbtn bottom-sx"> Vai al Catalogo</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuNavbar" aria-controls="menuNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menuNavbar">
+        <img
+                src="image/minilogo.png"
+                alt="Logo"
+                class="img-fluid imgzi"
+        />
+        <ul class="navbar-nav ml-auto bottom">
+            <li class="nav-item attivo">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/riservatautente}">Il Mio Profilo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/carrello}" id="carrelloDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-shopping-cart"></i> Carrello
+                </a>
+                <div class="dropdown-menu" aria-labelledby="carrelloDropdown">
+                    <h4 th:if="${carrello == null}">Carrello vuoto</h4>
+                    <table th:if="${carrello != null}">
+                        <tr th:each="playset : ${carrello}">
+                            <td th:text="${playset.nome}"></td>
+                            <td th:text="${playset.prezzo} +' €'"></td>
+                            <td>
+                                <a th:href="@{/riservatautente/rimuovi(id=${playset.id})}">
+                                    Rimuovi Playset
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <h5 th:if="${carrello != null}" th:text="'Totale Carrello: ' + ${#numbers.formatDecimal(totale, 0, 'POINT', 2, 'COMMA')} +' €'"></h5>
+                    <a th:if="${send}" th:href="@{/confermapagamento}">
+                        <button class="paypal-button">
+                            <img th:src="@{'image/paypal' + '.png'}" class="img-fluid" alt="Vai al pagamento">
+                        </button>
+                    </a>
+                    <br>
+                    <a th:if="${carrello != null}" th:href="@{/riservatautente/invia}">Conferma Ordine</a>
+                    <p th:if="${send}">Vai al pagamento</p>
+                    <!-- Contenuto del carrello qui -->
+                    <!-- Puoi usare JavaScript per caricare dinamicamente il contenuto del carrello -->
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<div class="container-fluid bg" >
+    <div class="slideshow-container">
+        <div class="slide ">
+            <a  onclick="plusSlides(-1)"><img src="/image/Banner1.png" alt="Immagine 1"></a>
+        </div>
+        <div class="slide ">
+            <a  onclick="plusSlides(1)"><img src="/image/Banner2.png" alt="Immagine 2"></a>
+        </div>
+    </div>
+</div>
+
+<!-- Sezione Prodotti in Evidenza -->
+<section class="container-fluid home-section ">
+    <div class="container margine-top-4">
+        <h2 class="text-center margine-bottom-4">Prodotti in Evidenza</h2>
+        <br>
+        <div class="row">
+            <!-- Prima Card -->
+            <div th:each="playset:${playsets}" class="col-md-4">
+                <div class="card custom-card">
+                    <!-- Modifica qui aggiungendo l'evento onclick sull'immagine -->
+                    <div class="image-container" th:onclick="'window.location.href=\'/dettaglio?id=' + ${playset.id} + '\''">
+                        <img th:src="@{'image/playset_' + ${playset.id} + '_a.jpg'}" class="card-img-top" alt="Immagine Prodotto">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 th:text="${playset.nome}" class="card-title">Prodotto 1</h5>
+                        <p th:text="${playset.eta}" class="card-text">Descrizione del Prodotto 1.</p>
+                        <p th:text="${playset.prezzo + ' €'}" class="card-text">$19.99</p>
+                        <div class="mt-auto"> <!-- Utilizza mt-auto per spingere il contenuto in basso -->
+                            <!-- Rimuovi il pulsante Dettagli -->
+                            <a th:href="@{/dettaglio/aggiungi(id=${playset.id})}" class="btn btn-success" onclick="aggiungiAlCarrello()">Aggiungi al carrello</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Altre Cards... -->
+        </div> <!-- Chiude la classe "row" -->
+    </div>
+
+
+<br>
+    <!-- Sezione Chi Siamo -->
+    <div class="col-md-12">
+
+            <h2 class="text-center margine-bottom-4"  >
+                <a th:href="@{/chisiamo}">Chi Siamo</a>
+            </h2>
+
+        <p>
+            Benvenuti nel nostro negozio online! Siamo appassionati nel fornire prodotti di alta qualità e un'esperienza di shopping eccezionale ai nostri clienti. Esplora la nostra vasta selezione di prodotti e trova esattamente quello che stai cercando.
+        </p>
+    </div>
+</section>
+    <!-- Footer -->
+    <footer class="text-center py-3">
+        <p>&copy; 2024 Il Mio Negozio E-Commerce</p>
+    </footer>
+
+
+<!-- Dipendenze JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{js/script.js}"></script>
+</body>
+</html>

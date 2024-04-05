@@ -1,0 +1,176 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+}
+.logo{
+ background-color: black ;
+}
+/* Header e Navbar */
+.container-fluid {
+    padding: 10px;
+    text-align: center;
+}
+.imgzi{
+margin-left:47%;
+width:7%;}
+.sideimpl{
+background-color: white;
+padding-left: 10%;
+}
+.bottom{
+position:absolute;
+bottom:0px;
+right:0px;
+}
+.bottom-sx{
+position:absolute;
+bottom:0px;
+left:0px;
+}
+.navbar {
+    background-image: url('/image/sfondobanner.png');
+    background-color: var(--colore-secondario);
+    text-color:black;
+}
+
+.navbar-nav .nav-link {
+    color:black;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--colore-accentuato);
+}
+.background{
+    background-color: #f2f2f2;
+}
+.container {
+    margin-top: 20px;
+}
+
+.card-text input[type="text"], .card-text input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.card-text input[type="submit"] {
+    background-color: #4caf50; /* Verde LEGO */
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card-text input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.cart-container, .form-container {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.cart-container {
+    background-color: #f4a71d; /* Giallo LEGO */
+}
+
+.form-container {
+    background-color: #009e49; /* Verde scuro LEGO */
+}
+
+h1, h3 {
+    text-align: center;
+    color: #000; /* Nero LEGO */
+}
+
+h4, h5 {
+    color: #333; /* Grigio LEGO */
+}
+
+table {
+    width: calc(50% - 20px); /* Ridimensiona le tabelle al 50% della larghezza della loro area genitore, con margine */
+    float: left; /* Imposta il float a sinistra per far sì che le tabelle siano posizionate una accanto all'altra */
+    margin-right: 20px; /* Aggiungi margine a destra per separare le tabelle */
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2; /* Grigio chiaro LEGO */
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+}
+footer {
+    background-color: #f2f2f2;
+    color: var(--sfondo);
+    padding: 10px 0;
+    clear: both;
+    position: relative;
+}
+
+/* Stile CSS per il form */
+form {
+    background-color: #f2f2f2; /* Grigio chiaro */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50; /* Verde */
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049; /* Verde più scuro al passaggio del mouse */
+}
+ul.navbar-nav.ml-auto.bottom{
+ background-color:#f8dc4b;
+}
+.bottonedltmod{
+margin-left:8%;
+margin-right:10%;
+}

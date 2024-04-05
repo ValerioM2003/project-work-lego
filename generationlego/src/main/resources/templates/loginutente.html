@@ -1,0 +1,85 @@
+
+
+
+<!DOCTYPE html>
+<html lang="it"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Il Mio E-Commerce</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuNavbar" aria-controls="menuNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menuNavbar">
+        <img src="image/minilogo.png" alt="Logo" class="img-fluid imgzi" onclick="goToHomePage()" style="cursor: pointer;"/>
+        <ul class="navbar-nav ml-auto bottom">
+            <li class="nav-item attivo">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/registrazioneutente}">registrati</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<!-- Contenuto del Login -->
+<section class="container-fluid home-section">
+    <p th:if="${errore}" style="color:red">Credenziali errate</p>
+    <form action="/loginutente" method="post">
+        <section class="container mt-4">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Accedi al Tuo Account</h2>
+                            <form>
+                                <div class="card-text">
+                                    <label >username:</label>
+                                    <input type="text" class="form-control" name="username" placeholder="Inserisci la tua email" required/>
+                                </div>
+                                <div class="card-text">
+                                    <label >password:</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Inserisci la tua password" required/>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block">accedi</button>
+                            </form>
+
+                            <div class="text-center mt-3">
+                                <div class="card-text">
+                                <label >non hai un account?</label>
+                                    <a class="nav-link" th:href="@{/registrazioneutente}">registrati</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+
+</section>
+<!-- Footer -->
+<!-- Footer -->
+<footer class=" text-center py-3">
+    <p>&copy; 2024 Il Mio Negozio E-Commerce</p>
+</footer>
+
+<!-- JavaScript dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{js/script.js}"></script>
+</body>
+</html>

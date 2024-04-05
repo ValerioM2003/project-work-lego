@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Riservata Utente</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/styleutente.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuNavbar" aria-controls="menuNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menuNavbar">
+        <img src="image/minilogo.png" alt="Logo" class="img-fluid imgzi" onclick="goToHomePage()" style="cursor: pointer;"/>
+        <ul class="navbar-nav ml-auto bottom">
+            <li class="nav-item attivo">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link" th:href="@{/riservataadmin/logout}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<section class="background">
+        <div class="cart-container">
+    <h1 th:text="' Area riservata di ' + ${user.username} "></h1>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Modifica Dati Personali
+                </button>
+            </div>
+            <br>
+    <h4 th:if="${carrello == null}">Carrello vuoto</h4>
+    <table th:if="${carrello != null}">
+        <tr th:each="playset : ${carrello}">
+            <td th:text="${playset.nome}"></td>
+            <td th:text="${playset.prezzo} +' €'"></td>
+            <td>
+                <a th:href="@{/riservatautente/rimuovi(id=${playset.id})}">
+                    Rimuovi Playset
+                </a>
+            </td>
+        </tr>
+    </table>
+    <h5 th:if="${carrello != null}" th:text="'Totale Carrello: ' + ${#numbers.formatDecimal(totale, 0, 'POINT', 2, 'COMMA')} +' €'"></h5>
+    <a th:if="${send}" th:href="@{/confermapagamento}">
+        <button class="paypal-button">
+            <img th:src="@{'image/paypal' + '.png'}" class="img-fluid" alt="Vai al pagamento">
+        </button>
+    </a>
+    <br>
+    <a th:if="${carrello != null}" th:href="@{/riservatautente/invia}">Conferma Ordine</a>
+    <p th:if="${send}">Vai al pagamento</p>
+        </div>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modifica i tuoi dati</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="form-container">
+                        <hr>
+                        <h3>Form di modifica dati</h3>
+                        <br>
+                        <form th:object="${user}" method="post">
+                            <input type="hidden" th:field="*{id}">
+                            <input type="hidden" th:field="*{profilo}"> <!--IL PROFILO NON PUO' ESSERE NULL-->
+                            <div class="card-text">
+                                <input type="text" th:field="*{nome}" placeholder="inserire nome" required>
+                                <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></p>
+                            </div>
+                            <br>
+                            <div class="card-text">
+                                <input type="text" th:field="*{cognome}" placeholder="inserire cognome" required>
+                                <p th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></p>
+                            </div>
+                            <br>
+
+                            <div class="card-text">
+                                <input type="text" th:field="*{username}" readonly>
+                            </div>
+                            <br>
+
+                            <div class="card-text">
+                                <input type="text" th:field="*{password}" placeholder="scegli password" required
+                                       id="pwd">
+                                <button type="button" onclick="mostra()">Mostra/Nascondi</button>
+                                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                            </div>
+                            <br>
+
+                            <div class="card-text">
+                                <input type="text" th:field="*{via}" placeholder="inserire via">
+                            </div>
+                            <br>
+                            <div class="card-text">
+                                <input type="text" th:field="*{citta}" placeholder="inserire citta">
+                            </div>
+                            <br>
+                            <div class="card-text">
+                                <input type="text" th:field="*{provincia}" placeholder="inserire provincia">
+                            </div>
+                            <br>
+                            <div class="card-text">
+                                <input type="text" th:field="*{cap}" placeholder="inserire cap">
+                            </div>
+                            <br>
+                            <div class="card-text">
+                                <input type="text" th:field="*{mail}" placeholder="inserire mail">
+                            </div>
+                            <br>
+                            <div class="card-text">
+                                <input type="text" th:field="*{telefono}" placeholder="inserire numero di telefono">
+                            </div>
+                            <br>
+                            <input type="submit" value="Modifica Dati">
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <table>
+        <thead>
+        <tr>
+
+            <th>Data Ordine</th>
+            <th>Prezzo</th>
+            <th>Prodotti</th>
+        </tr>
+        </thead>
+        <tr th:each="ordine : ${user.ordini}">
+            <td th:text="${ordine.data}"></td>
+            <td th:text="${#numbers.formatDecimal(ordine.importo,0,'POINT',2,'COMMA')} +' €'"></td>
+            <td>
+                <table>
+                    <tr th:each="playset: ${ordine.playset}">
+                        <td th:text="${playset.nome}"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <script th:src="@{js/script.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            var pwd = document.getElementById("pwd");
+            pwd.type = "password";
+        });
+        function mostra()
+        {
+            if(pwd.type == "password")
+                pwd.type = "text";
+            else
+                pwd.type = "password";
+        }
+    </script>
+</section>
+<footer class="sfondo-chiaro text-center py-3">
+    <p>&copy; 2024 Il Mio Negozio E-Commerce</p>
+</footer>
+</body>
+</html>

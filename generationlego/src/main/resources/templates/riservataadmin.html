@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Riservata Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/styleadmin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuNavbar" aria-controls="menuNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menuNavbar">
+        <img
+                src="image/minilogo.png"
+                alt="Logo"
+                class="img-fluid imgzi"
+                onclick="goToHomePage()"
+                style="cursor: pointer;"
+        />
+        <ul class="navbar-nav ml-auto bottom">
+            <li class="nav-item attivo">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link" th:href="@{/riservataadmin/logout}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<h4>Lista degli utenti e totale degli ordini:</h4>
+<table class=" table-striped">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Username</th>
+        <th>Mail</th>
+        <th>Telefono</th>
+        <th>Profilo</th>
+    </tr>
+    </thead>
+    <tr th:each="utente : ${utenti2}">
+        <td th:text="${utente.nome}"></td>
+        <td th:text="${utente.cognome}"></td>
+        <td th:text="${utente.username}"></td>
+        <td th:text="${utente.mail}"></td>
+        <td th:text="${utente.telefono}"></td>
+        <td th:text="${utente.profilo}"></td>
+    </tr>
+    <tr th:each="ordini : ${ordini}">
+        <td th:if="${ordini != null}"  th:text="'Totale Ordini: ' + ${#numbers.formatDecimal(ordini.importo, 0, 'POINT', 2, 'COMMA')} +' €'"></td>
+    </tr>
+    <h4 th:if="${ordini.isEmpty()}">Non hai effettuato ordini</h4>
+</table>
+<h4>Lista dei Playset:
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="bi bi-plus-lg"></i>
+
+    </button>
+</h4>
+<table class=" table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Nome</th>
+            <th>Prezzo</th>
+            <th>Brand</th>
+            <th>Età</th>
+            <th>Scorte</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="playset : ${playset}">
+            <td>
+                <!--<img th:src="@{${playset.immagine == null ? 'markerImage.jpg' : playset.immagine}}"
+                     style="max-height:100px;" alt="Immagine playset">-->
+            </td>
+            <td th:text="${playset.nome}"></td>
+            <td th:text="${playset.prezzo}"></td>
+            <td th:text="${playset.brand.nome}"></td>
+            <td th:text="${playset.eta}"></td>
+            <td th:text="${playset.scorte}"></td>
+            <td>
+                <h4>
+                    <a th:href="@{/riservataadmin(id=${playset.id})}" class="bottonedltmod" >
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a th:href="@{/riservataadmin/elimina(id=${playset.id})}" class="bottonedltmod" >
+                        <i class="bi bi-trash fs-4" ></i>
+                    </a>
+                </h4>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div th:classappend="${playset1.id != 0} ? 'modal fade show' : 'modal fade'" th:style="${playset1.id != 0} ? 'display:block' : 'display:none'"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Dati:</h1>
+                <a th:href="@{/riservataadmin}" >
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"></i>
+                </button>
+                </a>
+            </div>
+            <div class="modal-body">
+                <h4>Inserisci un Playset:</h4>
+                <form action="/riservataadmin" method="post" enctype="multipart/form-data">
+                    <label>Nome</label>
+                    <input type="text" name="nome" th:value="${playset1.nome}" placeholder="Nome Playset" required>
+                    <p th:if="${errori != null && errori.containsKey('nome')}" th:text="${errori.get('nome')}"></p>
+                    <br>
+                    <label>Prezzo</label>
+                    <input type="number" name="prezzo" step="any" th:value="${playset1.prezzo}"
+                           placeholder="Prezzo Playset" required>
+                    <p th:if="${errori != null && errori.containsKey('prezzo')}" th:text="${errori.get('prezzo')}"></p>
+                    <br>
+                    <label>Seleziona Brand</label>
+                    <select name="brand">
+                        <option th:each="brand : ${brands}" th:text="${brand.nome}"
+                                th:value="${brand.id}"
+                                th:selected="${playset1.brand != null && playset1.brand.id == brand.id}"></option>
+                    </select>
+                    <br>
+                    <label>Età</label>
+                    <input type="text" name="eta" th:value="${playset1.eta}" placeholder="Eta Playset" required>
+                    <p th:if="${errori != null && errori.containsKey('eta')}" th:text="${errori.get('eta')}"></p>
+                    <br>
+                    <label>Numero di pezzi</label>
+                    <input type="number" name="numero_pezzi" th:value="${playset1.numero_pezzi}" placeholder="Numero di pezzi del Playset" required>
+                    <p th:if="${errori != null && errori.containsKey('numero_pezzi')}" th:text="${errori.get('numero_pezzi')}"></p>
+                    <br>
+                    <label>Descrizione</label>
+                    <input type="text" name="descrizione" th:value="${playset1.descrizione}" placeholder="Descrizione Playset" required>
+                    <p th:if="${errori != null && errori.containsKey('descrizione')}" th:text="${errori.get('descrizione')}"></p>
+                    <br>
+                    <input type="file" name="immagine">
+                    <br>
+                    <label>Scorte</label>
+                    <input type="number" name="scorte" th:value="${playset1.scorte}" placeholder="Scorte Playset" required>
+                    <p th:if="${errori != null && errori.containsKey('scorte')}" th:text="${errori.get('scorte')}"></p>
+                    <br>
+                    <input type="submit" value="Registra Playset">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a th:href="@{/riservataadmin}" >
+                    <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </a>
+
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

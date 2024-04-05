@@ -1,0 +1,373 @@
+/* Reset del margine e del padding per garantire una base uniforme */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Definizione di colori ispirati a Lego */
+:root {
+    --colore-principale: #4285F4;
+    --colore-secondario:black;
+    --colore-accentuato: #FBBC05;
+    --sfondo: black;
+    --colore-testo: black;
+}
+
+/* Stili di base per il corpo della pagina */
+body {
+    font-family: 'Arial', sans-serif;
+    background-image:url('/image/SFONDO8.png');
+
+    background-color: white;
+    background-repeat: repeat-y;
+    color: var(--colore-testo);
+    margin: 0; /* Aggiunto per evitare spaziature esterne */
+    padding: 0; /* Aggiunto per evitare spaziature interne */
+
+}
+.img-error{
+width:50%
+}
+
+.logo{
+ background-color: black ;
+}
+/* Header e Navbar */
+.container-fluid {
+    padding: 0px;
+    text-align: center;
+}
+.imgzi{
+margin-left:47%;
+width:7%;}
+.sideimpl{
+background-color: white;
+padding-left: 10%;
+}
+.bottom{
+position:absolute;
+bottom:0px;
+right:0px;
+}
+.bottom-sx{
+position:absolute;
+bottom:0px;
+left:0px;
+}
+.navbar {
+    background-image: url('/image/sfondobanner.png');
+    background-color: var(--colore-secondario);
+    text-color:black;
+}
+
+.navbar-nav .nav-link {
+    color:black;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--colore-accentuato);
+}
+
+/* Prodotti in Evidenza */
+.custom-card {
+
+    margin-bottom: 20px;
+    background-color:white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+}
+
+.custom-card .image-container {
+    flex: 1; /* Modificato da 20 a 1 */
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.custom-card .image-container img {
+    width: 300px;
+    height: 300px; /* Altezza fissa per tutte le immagini */
+    object-fit: contain;
+}
+
+.custom-card .card-body {
+    text-align:center;
+    padding: 10px;
+}
+
+.card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.card-text {
+
+    font-size: 14px;
+    color: black;
+}
+
+.custom-card .btn {
+
+    padding: 8px 20px;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+.btn-success
+{
+    display: block;
+    width: 100%;
+    padding: 0.9375rem;
+    border-style: solid;
+    border-radius: 4px;
+    border-collapse: collapse;
+    text-align: center;
+    font-weight: 500;
+background-color: rgb(253, 128, 36);
+    border-color: rgb(253, 128, 36);
+    color: rgb(0, 0, 0);
+}
+.btn-success:hover {
+        background-color:white;
+        border-color: rgb(253, 128, 36);
+         color: rgb(0, 0, 0);
+    }
+}
+
+/* Footer */
+footer {
+    background-color: var(--colore-principale);
+    color: var(--sfondo);
+    padding: 10px 0;
+       width: 100%;
+       bottom: 0;
+        position: fixed; /* o "absolute" se preferisci */
+           bottom: 0;
+}
+
+/* Sidebar */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    background-image: url('/image/SFONDO1.jpg');
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+      background-color: #ffd700;
+    color: black;
+    padding: 15px 60px;
+    border: none;
+}
+.bottom-sx{
+position: absolute;
+    bottom: -60px;
+    left: 0px;
+}
+
+
+.openbtn:hover {
+       background-color: #f8dc4b;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+}
+ .catalogo {
+    display: inline-block;
+    padding: 10px 15px;
+  background-color: var( --colore-principale);
+    color: #fff; /* Colore del testo */
+    text-decoration: none; /* Rimuovi il sottolineato */
+    border-radius: 5px; /* Angoli arrotondati */
+    transition: background-color 0.3s ease; /* Effetto di transizione */
+      position: absolute;
+      bottom: 0px;
+          left: 0px;
+  }
+
+  .catalogo:hover {
+    background-color: #ffd700; /* Cambia il colore al passaggio del mouse */
+  }
+  .carousel-inner {
+
+      height: 400px;
+
+  }
+
+  /* Stile per le immagini delle slide */
+  .immagine-carosello{
+    height:400px;
+    width:auto;
+
+  }
+  /* Stile per il contenitore del carousel */
+  .home-section .container {
+
+      padding-left: 0;
+      padding-right: 0;
+  }
+
+
+/* Stile per la finestra del carrello */
+
+/* Stile per la finestra del carrello */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+
+      right:3px; /* Rimuove l'allineamento a destra */
+    z-index: 1000;
+    display: none;
+    padding: 1rem;
+    font-size: 1rem;
+    color: #212529;
+    text-align: center; /* Centra il testo */
+    list-style: none;
+    background-color: #f8dc4b; /* Giallo stile LEGO */
+    border: 1px solid #f7c948; /* Bordo giallo più scuro */
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.175);
+}
+
+/* Stile per gli elementi all'interno della finestra del carrello */
+.dropdown-menu a {
+    display: block;
+    margin-bottom: 0.5rem; /* Spazio tra gli elementi */
+    padding: 0.5rem 1rem;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: #fff; /* Sfondo bianco per gli elementi */
+    border: 1px solid #ccc; /* Bordo sottile grigio */
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease; /* Animazione transizione */
+}
+
+/* Stile per il link "Conferma Ordine" */
+.dropdown-menu a.confirm-order {
+    font-weight: 600;
+    background-color: #28a745; /* Verde per il link "Conferma Ordine" */
+    color: #fff; /* Testo bianco */
+    border: 1px solid #218838; /* Bordo verde più scuro */
+}
+
+/* Stile per il link "Rimuovi Playset" */
+.dropdown-menu a.remove-playset {
+    color: #dc3545; /* Rosso per il link "Rimuovi Playset" */
+}
+
+/* Animazione per mostrare la finestra del carrello */
+.dropdown-menu.show {
+    display: block;
+    animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -10px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+ul.navbar-nav.ml-auto.bottom{
+ background-color:#f8dc4b;
+}
+.prev, .next {
+  cursor: pointer;
+  position: relative;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.prev{
+left:25%}
+.next {
+  right: 25%;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.home-section {
+        margin-bottom: 100px; /* Aggiungi margine inferiore per lasciare spazio al footer */
+    }
+footer {
+    position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color:var(--colore-principale); /* Cambia il colore di sfondo se necessario */
+        text-align: center;
+        }
+/*.active, .dot:hover {
+
+}*/

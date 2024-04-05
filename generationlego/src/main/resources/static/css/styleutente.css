@@ -1,0 +1,143 @@
+/* CSS per lo stile elaborato della pagina, ispirato ai colori LEGO */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+}
+.logo{
+ background-color: black ;
+}
+/* Header e Navbar */
+.container-fluid {
+    padding: 10px;
+    text-align: center;
+}
+.imgzi{
+margin-left:47%;
+width:7%;}
+.sideimpl{
+background-color: white;
+padding-left: 10%;
+}
+.bottom{
+position:absolute;
+bottom:0px;
+right:0px;
+}
+.bottom-sx{
+position:absolute;
+bottom:0px;
+left:0px;
+}
+.navbar {
+    background-image: url('/image/sfondobanner.png');
+    background-color: var(--colore-secondario);
+    text-color:black;
+}
+
+.navbar-nav .nav-link {
+    color:black;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--colore-accentuato);
+}
+.background{
+    background-color: #f2f2f2;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.card-text input[type="text"], .card-text input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.card-text input[type="submit"] {
+    background-color: #4caf50; /* Verde LEGO */
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*.card-text input[type="submit"]:hover {
+    background-color: #45a049;
+}*/
+
+.paypal-button {
+    margin-top: 20px;
+    width: 200px;
+    height: 100px;
+}
+
+.cart-container, .form-container {
+    width: 100%;
+    float: left;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.cart-container {
+    background-color: #f2f2f2;
+}
+
+.form-container {
+    background-color: #f2f2f2;
+}
+
+h1, h3 {
+    text-align: center;
+    color: #000; /* Nero LEGO */
+}
+
+h4, h5 {
+    color: #333; /* Grigio LEGO */
+}
+
+table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    background-color: #f2f2f2;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2; /* Grigio chiaro LEGO */
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+}
+
+footer {
+    background-color: var(--colore-principale);
+    color: var(--sfondo);
+    padding: 10px 0;
+       width: 100%;
+       bottom: 0;
+}
+ul.navbar-nav.ml-auto.bottom{
+ background-color:#f8dc4b;
+}
